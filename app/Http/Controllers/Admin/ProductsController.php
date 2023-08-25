@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Products;
 
 class ProductsController extends Controller
 {
@@ -11,7 +13,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $posts = Products::paginate(5);
+        $products = Products::paginate(5);
         return view('admin.products.index', compact('products'));
     }
 
@@ -20,7 +22,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -36,7 +38,7 @@ class ProductsController extends Controller
      */
     public function show(Post $post)
     {
-       //
+        return view('products.show',compact('product'));
     }
 
     /**
