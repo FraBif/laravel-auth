@@ -27,5 +27,5 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 });
 
 Route::name('guest.')->group(function () {
-    Route::get('/', [ GuestHomeController::class , 'home'])->name('home');
+    Route::get('/', [ GuestDashboardController::class , 'home'])->name('home');
 });
