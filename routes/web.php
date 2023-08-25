@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Guest\DashboardController as GuestDashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('/', [ AdminDashboardController::class , 'home'])->name('home');
+    Route::resource('/products', ProductsController::class);
+});
+
+Route::name('guest.')->group(function () {
+    Route::get('/', [ GuestHomeController::class , 'home'])->name('home');
+});
