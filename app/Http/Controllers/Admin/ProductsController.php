@@ -37,7 +37,7 @@ class ProductsController extends Controller
         
         Products::create($request->all());
          
-        return redirect()->route('admin.products.index')
+        return redirect()->route('admin.products.show')
                         ->with('success','Product created successfully.');
     }
 
@@ -52,9 +52,9 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Products $products)
     {
-        //
+        return view('products.edit',compact('product'));
     }
 
     /**
