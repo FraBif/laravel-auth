@@ -30,7 +30,15 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+        
+        Products::create($request->all());
+         
+        return redirect()->route('admin.products.index')
+                        ->with('success','Product created successfully.');
     }
 
     /**
