@@ -54,15 +54,23 @@ class ProductsController extends Controller
      */
     public function edit(Products $products)
     {
-        return view('products.edit',compact('product'));
+        return view('admin.products.edit',compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Products $products)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+        
+        $products->update($request->all());
+        
+        return redirect()->route('admin.products.index')
+                        ->with('success','Product updated successfully');
     }
 
     /**
